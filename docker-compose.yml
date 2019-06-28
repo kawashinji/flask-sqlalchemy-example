@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    build:
+      context: ./docker/db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USERNAME: flask
+      MYSQL_PASSWORD: password
+      DATABASE_NAME: flask
+  redis:
+    image: redis:5.0.4
+    ports:
+      - "6379:6379"
