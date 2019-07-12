@@ -7,6 +7,7 @@ from functools import reduce
 
 from app import redisClient
 from app import mysqlClient
+from app import sqsClient
 from db import init_db
 import app.models
 
@@ -32,6 +33,11 @@ def mysql():
     client.add(''.join(random.choices(string.ascii_letters + string.digits, k=10)))
     users = client.all()
     return ''.join(map(lambda user: str(user.id) + ":" + user.name + "<br>", users))
+
+@app.route('/api/sqs')
+def sqs():
+    client = sqsClient.Client(app)
+    return client.add(''.join(random.choices(string.ascii_letters + string.digits, k=10)))
 
 if __name__ == '__main__':
     app.run()

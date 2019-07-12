@@ -19,4 +19,11 @@ class DevelopmentConfig:
         'db': os.getenv('REDIS_DB', 0),
     })
 
+    AWS = {
+        'ACCESS_KEY': os.getenv('AWS_ACCESS_KEY_ID', 'dummy'),
+        'SECRET_KEY': os.getenv('AWS_SECRET_ACCESS_KEY', 'dummy'),
+        'REGION': os.getenv('AWS_REGION', 'ap-northeast-1'),
+    }
+    SQS_NAME = 'development-test'
+
 Config = DevelopmentConfig
