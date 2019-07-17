@@ -1,4 +1,4 @@
-# Flask Example app
+# Flask + Celery Example app
 
 ## Install
 
@@ -12,7 +12,7 @@ pip install -r requirements.txt
 ### Migration
 
 ```
-FLASK_APP=run.py flask db upgrade
+FLASK_APP=web/run.py flask db upgrade
 ```
 
 ## Usage
@@ -28,5 +28,20 @@ docker-compose up
 
 ```
 source venv/bin/activate
-uwsgi --http=0.0.0.0:8080 --wsgi-file=run.py  --callable=app
+uwsgi --http=0.0.0.0:8080 --wsgi-file=web/run.py  --callable=app
 ```
+
+### Start Worker
+
+```
+celery --app=workers.tasks worker --loglevel=info -c 2
+python -m workers.run
+```
+
+#### flower
+
+```
+celery flower --app=workers.tasks
+```
+
+Open browser `http://localhost:5555`

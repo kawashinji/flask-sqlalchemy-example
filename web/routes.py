@@ -11,7 +11,7 @@ def routes(app):
 
     @app.route('/api/redis')
     def redis():
-        client = redisClient.Client(app)
+        client = redisClient.Client()
         client.set('hoge', 'fuga')
         return client.get('hoge')
 
@@ -24,5 +24,5 @@ def routes(app):
 
     @app.route('/api/sqs')
     def sqs():
-        client = sqsClient.Client(app)
+        client = sqsClient.Client()
         return client.add(''.join(random.choices(string.ascii_letters + string.digits, k=10)))

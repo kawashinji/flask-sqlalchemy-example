@@ -26,4 +26,15 @@ class DevelopmentConfig:
     }
     SQS_NAME = 'development-test'
 
+    BROKER_URL = os.getenv('BROKER_URL', 'redis://localhost/1')
+    CELERYD_CONCURRENCY = 1 # 処理するプロセス数
+    CELERY_RESULT_BACKEND = 'redis'
+    CELERY_TASK_SERIALIZER = 'json'
+    CELERY_RESULT_SERIALIZER = 'json'
+    CELERY_ACCEPT_CONTENT = ['json']
+    CELERY_RESULT_BACKEND = 'redis'
+    CELERYD_LOG_FILE = os.getenv('CELERYD_LOG_FILE', './celeryd.log')
+    CELERYD_LOG_LEVEL = 'INFO'
+    CELERY_IMPORTS = ('tasks', )
+
 Config = DevelopmentConfig
