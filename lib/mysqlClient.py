@@ -1,5 +1,5 @@
-from app.models.user import User
-from db import db
+from lib.models.user import User
+from config.db import db
 
 class Client:
 
