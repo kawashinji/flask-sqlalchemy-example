@@ -1,8 +1,8 @@
 FROM python:3.7
 
-COPY ../../ /app
+COPY . /app
 WORKDIR /app
 
 RUN pip install -r requirements.txt
 
-RUN python -m worker.run
+CMD ["python", "-m", "worker.run"]

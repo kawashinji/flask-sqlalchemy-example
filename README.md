@@ -38,4 +38,11 @@ source venv/bin/activate
 python -m worker.run
 ```
 
-Open browser `http://localhost:5555`
+## Development
+
+### Docker
+
+```
+docker build -t flask-fargate -f docker/web/Dockerfile .
+docker build -t flask-worker-fargate -f docker/worker/Dockerfile .
+```
