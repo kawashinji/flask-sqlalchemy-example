@@ -1,4 +1,4 @@
-# Flask + Celery Example app
+# Flask Example app
 
 ## Install
 
@@ -12,7 +12,7 @@ pip install -r requirements.txt
 ### Migration
 
 ```
-FLASK_APP=web/run.py flask db upgrade
+FLASK_APP=web.run flask db upgrade
 ```
 
 ## Usage
@@ -34,14 +34,8 @@ uwsgi --http=0.0.0.0:8080 --wsgi-file=web/run.py  --callable=app
 ### Start Worker
 
 ```
-celery --app=workers.tasks worker --loglevel=info -c 2
-python -m workers.run
-```
-
-#### flower
-
-```
-celery flower --app=workers.tasks
+source venv/bin/activate
+python -m worker.run
 ```
 
 Open browser `http://localhost:5555`

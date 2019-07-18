@@ -11,18 +11,18 @@ class Client:
 
     def add(self, value):
         try:
-            queue = self.sqs.get_queue_by_name(QueueName=self.name)
+            queue = self.sqs.get_queue_by_name(QueueName = self.name)
         except:
-            queue = self.sqs.create_queue(QueueName=self.name)
+            queue = self.sqs.create_queue(QueueName = self.name)
 
-        return str(queue.send_message(MessageBody=value))
+        return str(queue.send_message(MessageBody = value))
 
     def get(self):
-        queue = self.sqs.get_queue_by_name(QueueName=self.name)
+        queue = self.sqs.get_queue_by_name(QueueName = self.name)
         messages = queue.receive_messages(MaxNumberOfMessages=1)
-        if len(messages) > 0:
-            message = messages[0].body
-            messages[0].delete
-            return message
-        else:
-            return None
+        return messages[0] if len(messages) > 0 else None
+
+    def delete(self, id, receiptHandle):
+        entries = [{ "Id": id, "ReceiptHandle": receiptHandle }]
+        queue = self.sqs.get_queue_by_name(QueueName = self.name)
+        return queue.delete_messages(Entries = entries)
